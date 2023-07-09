@@ -6,7 +6,7 @@
         <ul class="list-group">
             <li class="list-group-item mb-2 py-0 rounded-3">
                 <div class="input-group">
-                    <input type="text" class="form-control border-0 py-3 shadow-none" placeholder="add your todo" #titleInput>
+                    <input type="text" class="form-control border-0 py-3 shadow-none" placeholder="add your todo" #titleInput  (keyup.enter)="onClick(titleInput)">
                     <button class="btn text-success border-0"
                     (click)="onClick(titleInput)"> 
                         <i class="fa-solid fa-circle-plus fa-xl"></i>
