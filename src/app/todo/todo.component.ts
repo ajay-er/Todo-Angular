@@ -15,10 +15,14 @@ export class TodoComponent {
   constructor(private todoService: TodoService) { }
   
   ngOnInit(): void{
-    this.todoService.firestoreCollection.valueChanges()
+
+    this.todoService.firestoreCollection.valueChanges({ idField: 'id' })
       .subscribe((item) => {
-        this.todos = item;
-    })
+
+        this.todos = item.sort((a: any, b: any) => { return a.isDone - b.isDone });
+
+      })
+    
   }
 
   onClick(input: HTMLInputElement) {
@@ -30,9 +34,19 @@ export class TodoComponent {
       input.value = '';
 
     }
+
+  }
+
+  onStatusChange(todoId: string, newStatus: boolean) {
+
+    this.todoService.updateTodoStatus(todoId, newStatus);
     
   }
 
-   
+  onDelete(todoId: string) {
+    
+    this.todoService.deleteTodo(todoId);
+
+  }
 
 }
